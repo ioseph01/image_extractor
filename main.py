@@ -1,7 +1,6 @@
 from PIL import Image
 import os
 import pygame
-import utils
 import sys
 
 RENDER_SCALE = 2.0
@@ -14,6 +13,10 @@ RENDER_SCALE = 2.0
 # Auto Name 
 # Render Past Selections on the Proper Screen, it is static when trying to move
 
+def load_image(path):
+    img = pygame.image.load(path).convert()
+    img.set_colorkey((0,0,0))
+    return img
 
 class Editor:
     
@@ -36,12 +39,12 @@ class Editor:
         
         pygame.font.init()
         self.my_font = pygame.font.SysFont('Comic Sans MS', self.dim[0] // 10)
-        self.background = utils.load_image(fileName)
+        self.background = load_image(fileName)
         
         
         self.scroll = [0,0]
         self.tile_size = tile_size
-        self.background = pygame.transform.scale(utils.load_image(fileName), self.dim)
+        self.background = pygame.transform.scale(load_image(fileName), self.dim)
         
         self.screen2 = pygame.Surface(self.dim)
         
